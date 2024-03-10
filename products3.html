@@ -18,7 +18,7 @@
         #allProducts { 
             display: grid;
             grid-gap: 50px; 
-            grid-template-columns: auto auto auto auto;
+            grid-template-columns: auto auto auto auto auto;
 
         }
         .name { 
@@ -42,71 +42,30 @@
         .product p { 
             margin: 5px; 
         }
-        form { 
-            border: solid red;
-            width: 100%; 
-            display: flex;
-            justify-content: center;
-            margin-bottom: 50px;
-        }
-        form select{ 
-            width: 200px; 
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <form>
-            <select id="choose"> 
-                <option value="select"> Select </option>
-            </select>
-        </form>
         <div id="allProducts">
             <script>
                 $.get("products2.json", function(data) { 
+                        console.log("raw data \n" + data); 
                         str = JSON.stringify(data); 
-                        choose = document.getElementById("choose"); 
+                        console.log("string \n" + str);
         
                         data.forEach(function (product) { 
-                            
-                            str1 = "<div class='product select "; 
-
-                            for(let i = 0; i < product.Categories.length; i++) { 
-                                currCat = product.Categories[i]
-                                str1 += (currCat + " "); 
-                                console.log(str1); 
-                                choose.innerHTML += "<option value='" + currCat + "'> " + currCat + "</option>"; 
-                            }
-                            str1 += "' >"; 
-                            str1 += "<p class= 'name'>" + product.Name + "</p>"; 
-                            str1 += "<p>" + product.Description + "</p>"; 
-                            str1 += "<p>" + product.Price + "</p>"; 
-                            str1 += "<p>" + product.Categories + "</p>"; 
-                            str1 += "</div>"; 
+                            str = "<div class='product'>"; 
+                            str += "<p class= 'name'>" + product.Name + "</p>"; 
+                            str += "<p>" + product.Description + "</p>"; 
+                            str += "<p>" + product.Price + "</p>"; 
+                            str += "<p>" + product.Categories + "</p>"; 
+                            str += "</div>"; 
     
-                            document.getElementById("allProducts").innerHTML += str1; 
+                            document.getElementById("allProducts").innerHTML += str; 
                             // document.write(str); 
                         }); 
                     }
                 ); 
-            </script>
-
-            <script>
-                allProducts = document.getElementById("allProducts"); 
-                choose.onchange = function() { 
-                    allProducts.innerHTML = ""; 
-                    $('#choose option').each( function() { 
-                        if ($(this).is(':selected')) { 
-                            className = this.value.split(' ')[0]; 
-                            var item = $('.' + className); 
-                            item.each( function(index, product) { 
-                                console.log(product); 
-                                allProducts.appendChild(product)
-                            }); 
-                        }
-                    }); 
-                }
             </script>
         </div>
     </div>

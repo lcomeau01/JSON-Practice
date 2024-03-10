@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Products 2</title>
+
+    <style>
+        html, body { 
+            height: 100%; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            margin: 0px; 
+            overflow-y: scroll;
+            flex-direction: column;
+        }
+        #allProducts { 
+            display: grid;
+            grid-gap: 10px; 
+            grid-template-columns: auto auto auto auto auto;
+
+        }
+        .name { 
+            font-weight: bolder;
+        }
+        .product { 
+            margin: 10px; 
+            border: solid black 3px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            height: 200px; 
+            width: 200px; 
+            border-radius: 10px;
+            box-shadow: 10px 10px;
+        }
+        .product:hover { 
+            box-shadow: 10px 10px 100px blue;
+        }
+        .product p { 
+            margin: 5px; 
+        }
+        form { 
+            width: 100%; 
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            position: fixed;
+            top: 50px; 
+        }
+        form select{ 
+            width: 200px; 
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <select id="choose"> 
+            <option value="select"> All Products </option>
+        </select>
+    </form>
+    <div class="container">
+        <div id="allProducts">
+            <script>
+                function showProducts(array) { 
+                    allProducts = document.getElementById("allProducts"); 
+                    allProducts.innerHTML = " "; 
+                    for (let i = 0; i < array.length; i++) { 
+                        allProducts.innerHTML += array[i];  
+                        console.log(array[i]); 
+                    }
+                }
+            </script>
+
+            <script>
+                $.get("products2.json", function(data) { 
+                        str = JSON.stringify(data); 
+                        choose = document.getElementById("choose"); 
+                        SELECTED_PRODUCTS = new Array(data.length); 
+                        PRODUCT_DIVS = new Array(data.length); 
+                        index = 0; 
+        
+                        data.forEach(function (product) { 
+                            
+                            
+                            str1 = "<div class='product select "; 
+
+                            for(let i = 0; i < product.Categories.length; i++) { 
+                                repeat = false; 
+                                currCat = product.Categories[i]
+                                str1 += (currCat + " "); 
+
+                                for (let i = 0; i < choose.length; i++) { 
+                                    if (currCat == choose[i].value) repeat = true; 
+                                }
+                                if (repeat != true) choose.innerHTML += "<option value='" + currCat + "'> " + currCat + "</option>"; 
+                            }
+                            str1 += "' >"; 
+                            str1 += "<p class= 'name'>" + product.Name + "</p>"; 
+                            str1 += "<p>" + product.Description + "</p>"; 
+                            str1 += "<p>" + product.Price + "</p>"; 
+                            str1 += "<p>" + product.Categories + "</p>"; 
+                            str1 += "</div>"; 
+    
+                            SELECTED_PRODUCTS[index] = str1; 
+                            console.log(SELECTED_PRODUCTS[index]); 
+                            index++; 
+                            // document.write(str); 
+                        }); 
+                        showProducts(SELECTED_PRODUCTS); 
+                    }
+                ); 
+            </script>
+
+            <script>
+                allProducts = document.getElementById("allProducts"); 
+                choose.onchange = function() { 
+                    
+                    $('#choose option').each( function() { 
+                        if ($(this).is(':selected')) { 
+                            showProducts(SELECTED_PRODUCTS); 
+                            className = this.value.split(' ')[0]; 
+                            var item = $('.' + className); 
+                            itemDetails = new Array(item.length); 
+                            for (let i = 0; i < item.length; i++) { 
+                                strCurr = "<div class = 'product'>" + item[i].innerHTML + "</div>"; 
+                                itemDetails[i] = strCurr; 
+                                console.log(itemDetails[i]); 
+                            }
+                            showProducts(itemDetails); 
+                        }
+                    }); 
+                }
+            </script>
+        </div>
+    </div>
+</body>
+</html>
