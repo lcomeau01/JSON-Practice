@@ -1,0 +1,63 @@
+
+[
+            { 
+                "Name": "Oversized Queen Graphic Tee", 
+                "Description": "Oversized T-shirt with Queen Logo", 
+                "Price": "$34.95",
+                "Categories": ["Women's Clothes", "Graphic Tees", "Band Tees"]
+            }, 
+            { 
+                "Name": "Oversized Rolling Stones Graphic Tee", 
+                "Description": "Oversized T-shirt with Rolling Stones Logo", 
+                "Price": "$34.95",
+                "Categories": ["Women's Clothes", "Graphic Tees", "Band Tees"]
+            }, 
+            { 
+                "Name": "Cropped Smiley Graphic Tee", 
+                "Description": "Cropped T-shirt with a Smiley Face on it", 
+                "Price": "$34.95",
+                "Categories": ["Women's Clothes", "Graphic Tees", "Cropped Tees"]
+            }, 
+            { 
+                "Name": "Crew Neck Fleece Sweatshirt", 
+                "Description": "Comfy Fleece Sweatshirt with Slighlt Oversized Fit", 
+                "Price": "$49.95",
+                "Categories": ["Women's Clothes", "Crew Neck"]
+            }, 
+            { 
+                "Name": "Fleece Hoodie", 
+                "Description": "Comfy Fleece Hoodie with Heavy Fabric and Feel", 
+                "Price": "$59.95",
+                "Categories": ["Women's Clothes", "Hoodies"]
+            }, 
+            { 
+                "Name": "Men's Fleece Hoodie", 
+                "Description": "Comfy Fleece Hoodie with Heavy Fabric and Feel", 
+                "Price": "$69.95",
+                "Categories": ["Men's Clothes", "Hoodies"]
+            }, 
+            { 
+                "Name": "Fleece Polo Sweatshirt", 
+                "Description": "Polo with Oversized Longsleeves and Lined with Fleece", 
+                "Price": "$35.95",
+                "Categories": ["Men's Clothes", "Polos"]
+            }, 
+            { 
+                "Name": "Sweater Polo Shirt", 
+                "Description": "Short Sleeve Polo made of Sweater Material", 
+                "Price": "$44.95",
+                "Categories": ["Men's Clothes", "Polos"]
+            }, 
+            { 
+                "Name": "Button-up Polo Shirt", 
+                "Description": "A Polo Made of Sweater material that Buttons Up in te Front", 
+                "Price": "$44.95",
+                "Categories": ["Men's Clothes", "Polos"]
+            }, 
+            { 
+                "Name": "Fleece Shirt Jacket", 
+                "Description": "A Shacket made of Fleece and Cotton", 
+                "Price": "$59.95",
+                "Categories": ["Men's Clothes", "Jackets"]
+            }
+        ]
