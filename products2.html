@@ -51,10 +51,7 @@
                 $.get("products2.json", function(data) { 
                         console.log("raw data \n" + data); 
                         str = JSON.stringify(data); 
-                        console.log("string \n" + str); 
-        
-                        // document.getElementById("printJSON").innerText = str; 
-                        allProductsContainer = document.getElementById("allProducts");
+                        console.log("string \n" + str);
         
                         data.forEach(function (product) { 
                             str = "<div class='product'>"; 

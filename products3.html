@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Products 2</title>
+
+    <style>
+        html, body { 
+            height: 100%; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            margin: 0px; 
+        }
+        #allProducts { 
+            display: grid;
+            grid-gap: 50px; 
+            grid-template-columns: auto auto auto auto;
+
+        }
+        .name { 
+            font-weight: bolder;
+        }
+        .product { 
+            margin: 10px; 
+            border: solid black 3px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            height: 200px; 
+            width: 200px; 
+            border-radius: 10px;
+            box-shadow: 10px 10px;
+        }
+        .product:hover { 
+            box-shadow: 10px 10px 100px blue;
+        }
+        .product p { 
+            margin: 5px; 
+        }
+        form { 
+            border: solid red;
+            width: 100%; 
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+        form select{ 
+            width: 200px; 
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <select id="choose"> 
+                <option value="select"> Select </option>
+            </select>
+        </form>
+        <div id="allProducts">
+            <script>
+                $.get("products2.json", function(data) { 
+                        str = JSON.stringify(data); 
+                        choose = document.getElementById("choose"); 
+        
+                        data.forEach(function (product) { 
+                            
+                            str1 = "<div class='product select "; 
+
+                            for(let i = 0; i < product.Categories.length; i++) { 
+                                currCat = product.Categories[i]
+                                str1 += (currCat + " "); 
+                                console.log(str1); 
+                                choose.innerHTML += "<option value='" + currCat + "'> " + currCat + "</option>"; 
+                            }
+                            str1 += "' >"; 
+                            str1 += "<p class= 'name'>" + product.Name + "</p>"; 
+                            str1 += "<p>" + product.Description + "</p>"; 
+                            str1 += "<p>" + product.Price + "</p>"; 
+                            str1 += "<p>" + product.Categories + "</p>"; 
+                            str1 += "</div>"; 
+    
+                            document.getElementById("allProducts").innerHTML += str1; 
+                            // document.write(str); 
+                        }); 
+                    }
+                ); 
+            </script>
+
+            <script>
+                allProducts = document.getElementById("allProducts"); 
+                choose.onchange = function() { 
+                    allProducts.innerHTML = ""; 
+                    $('#choose option').each( function() { 
+                        if ($(this).is(':selected')) { 
+                            className = this.value.split(' ')[0]; 
+                            var item = $('.' + className); 
+                            item.each( function(index, product) { 
+                                console.log(product); 
+                                allProducts.appendChild(product)
+                            }); 
+                        }
+                    }); 
+                }
+            </script>
+        </div>
+    </div>
+</body>
+</html>
