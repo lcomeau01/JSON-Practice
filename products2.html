@@ -6,15 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Products 2</title>
+
+    <style>
+        html, body { 
+            height: 100%; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            margin: 0px; 
+        }
+        #allProducts { 
+            display: grid;
+            grid-gap: 50px; 
+            grid-template-columns: auto auto auto auto;
+
+        }
+        .name { 
+            font-weight: bolder;
+        }
+        .product { 
+            margin: 10px; 
+            border: solid black 3px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            height: 200px; 
+            width: 200px; 
+            border-radius: 10px;
+            box-shadow: 10px 10px;
+        }
+        .product:hover { 
+            box-shadow: 10px 10px 100px blue;
+        }
+        .product p { 
+            margin: 5px; 
+        }
+    </style>
 </head>
 <body>
-    <script>
-        $.get("products2.json", function(data) { 
-                console.log("raw data \n" + data); 
-                str = JSON.stringify(data); 
-                console.log("string \n" + str); 
-            }
-        ); 
-    </script>
+    <div class="container">
+        <div id="allProducts">
+            <script>
+                $.get("products2.json", function(data) { 
+                        console.log("raw data \n" + data); 
+                        str = JSON.stringify(data); 
+                        console.log("string \n" + str); 
+        
+                        // document.getElementById("printJSON").innerText = str; 
+                        allProductsContainer = document.getElementById("allProducts");
+        
+                        data.forEach(function (product) { 
+                            str = "<div class='product'>"; 
+                            str += "<p class= 'name'>" + product.Name + "</p>"; 
+                            str += "<p>" + product.Description + "</p>"; 
+                            str += "<p>" + product.Price + "</p>"; 
+                            str += "<p>" + product.Categories + "</p>"; 
+                            str += "</div>"; 
+    
+                            document.getElementById("allProducts").innerHTML += str; 
+                            // document.write(str); 
+                        }); 
+                    }
+                ); 
+            </script>
+        </div>
+    </div>
 </body>
 </html>
