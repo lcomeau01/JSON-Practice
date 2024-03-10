@@ -14,7 +14,6 @@
             justify-content: center;
             align-items: center;
             margin: 0px; 
-            overflow-y: scroll;
             flex-direction: column;
         }
         #allProducts { 
@@ -25,6 +24,15 @@
         }
         .name { 
             font-weight: bolder;
+        }
+        .container { 
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #writeProducts { 
+            margin-bottom: 10px;
         }
         .product { 
             margin: 10px; 
@@ -67,11 +75,13 @@
 <body>
     <form>
         <select id="choose"> 
-            <option value="select"> All Products </option>
+            <option value="select"> Select </option>
         </select>
         <button id="filter"> Filter </button>
     </form>
     <div class="container">
+        <div id="writeProducts">
+        </div>
         <div id="allProducts">
             <script>
                 $.get("products2.json", function(data) { 
@@ -98,7 +108,6 @@
                         str += "</div>"; 
 
                         document.getElementById("allProducts").innerHTML += str; 
-                        // document.write(str); 
                     }); 
                 }); 
 
@@ -110,11 +119,24 @@
                 }
 
                 button = document.getElementById("filter"); 
+                productDiv = document.getElementById("writeProducts"); 
                 button.onclick = function(event) { 
                     $('#choose option').each( function() { 
+                        pString = "<p> Items in this category include: "; 
                         if ($(this).is(':selected')) { 
+                            category = this.value; 
                             $.get("products2.json", function(data) { 
-                                
+                                data.forEach(function(product, index, arr) { 
+                                    if (getCategories(product.Categories, category)) { 
+                                        pString += product.Name; 
+                                        console.log(pString); 
+                                        pString += ", "; 
+                                    }
+                                }); 
+                                getRid = pString.lastIndexOf(','); 
+                                pString = pString.substring(0, getRid); 
+                                pString += " </p>"
+                                productDiv.innerHTML = pString; 
                             }); 
                         }
                     }); 
