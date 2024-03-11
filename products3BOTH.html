@@ -8,7 +8,7 @@
     <title>Products 2</title>
 
     <style>
-       html { 
+       html, body { 
             height: 100%; 
             display: flex; 
             justify-content: center;
@@ -16,17 +16,14 @@
             margin: 0px; 
             flex-direction: column;
         }
-        body { 
-            border: black solid 8px; 
-            border-radius: 10px;
-            height: 50%; 
-            width: 50%; 
-            display: flex; 
-            justify-content: center;
-            align-items: center;
-            margin: 0px; 
-            flex-direction: column;
-            box-shadow: 10px 10px #c3c4c3;
+        #allProducts { 
+            display: grid;
+            grid-gap: 50px; 
+            grid-template-columns: auto auto auto auto auto;
+
+        }
+        .name { 
+            font-weight: bolder;
         }
         .container { 
             display: flex; 
@@ -37,8 +34,23 @@
         #writeProducts { 
             margin-bottom: 10px;
         }
-        .allProducts { 
-            max-width: 400px;
+        .product { 
+            margin: 10px; 
+            border: solid black 3px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            height: 200px; 
+            width: 200px; 
+            border-radius: 10px;
+            box-shadow: 10px 10px;
+        }
+        .product:hover { 
+            box-shadow: 10px 10px 100px blue;
+        }
+        .product p { 
+            margin: 5px; 
         }
         form { 
             width: 100%; 
@@ -46,6 +58,8 @@
             flex-direction: row;
             justify-content: center;
             margin-bottom: 50px;
+            position: fixed;
+            top: 50px; 
         }
         form select{ 
             width: 200px; 
@@ -73,7 +87,9 @@
             <script>
                 $.get("products2.json", function(data) { 
                     choose = document.getElementById("choose"); 
+        
                     data.forEach(function (product) { 
+
                         for(let i = 0; i < product.Categories.length; i++) { 
                             repeat = false; 
                             currCat = product.Categories[i]
@@ -83,6 +99,16 @@
                             }
                             if (repeat != true) choose.innerHTML += "<option value='" + currCat + "'> " + currCat + "</option>"; 
                         }
+
+                        // display the products originally 
+                        str = "<div class='product'>"; 
+                        str += "<p class= 'name'>" + product.Name + "</p>"; 
+                        str += "<p>" + product.Description + "</p>"; 
+                        str += "<p>" + product.Price + "</p>"; 
+                        str += "<p>" + product.Categories + "</p>"; 
+                        str += "</div>"; 
+
+                        document.getElementById("allProducts").innerHTML += str; 
                     }); 
                 }); 
 
@@ -102,12 +128,7 @@
                             category = this.value; 
                             $.get("products2.json", function(data) { 
                                 data.forEach(function(product, index, arr) { 
-                                    if (category == "select") { 
-                                        pString += product.Name; 
-                                        console.log(pString); 
-                                        pString += ", "; 
-                                    }
-                                    else if (getCategories(product.Categories, category)) { 
+                                    if (getCategories(product.Categories, category)) { 
                                         pString += product.Name; 
                                         console.log(pString); 
                                         pString += ", "; 
