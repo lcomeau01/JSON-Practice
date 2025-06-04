@@ -2,7 +2,7 @@
 
 **JSON Product Viewer** is a web-based project designed to practice **creating, parsing, and dynamically displaying JSON data** using **JavaScript** and **jQuery**. 
 The site reads from a custom `products.json` file and renders a responsive product catalog, with filtering capabilities based on categories.
-**STYLES ONLY WORK ON DESKTOP**
+**STYLES ONLY WORK ON DESKTOP -- NOT MOBILE RESPONSIVE**
 
 ## Features
 
