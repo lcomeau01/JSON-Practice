@@ -4,8 +4,6 @@
 The site reads from a custom `products.json` file and renders a responsive product catalog, with filtering capabilities based on categories.
 
 
----
-
 ## Features
 
 - Reads a local JSON file containing product information
@@ -14,16 +12,12 @@ The site reads from a custom `products.json` file and renders a responsive produ
 - Styled with CSS Grid and interactive hover effects
 - Responsive, clean layout
 
----
-
 ## How It Works
 
 1. On load, the app fetches `products.json` using **jQuery's `.get()`** method.
 2. Each product entry is converted into a styled product card.
 3. The dropdown is automatically populated with unique category names found in the JSON.
 4. When a category is selected, only matching products are displayed.
-
----
 
 ## File Overview
 
